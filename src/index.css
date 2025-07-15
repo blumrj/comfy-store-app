@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, caramellatte, dim;
+}
+
+@layer components{
+    .align-element{
+        @apply mx-auto max-w-6xl;
+    }
+}
