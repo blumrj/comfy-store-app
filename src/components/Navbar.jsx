@@ -5,10 +5,10 @@ import { BsCart3 } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import { getNavLinks } from "../utils";
 
 const Navbar = () => {
-  //getting the first route object to render in the main navbar
-  const navLinks = routes[0].children;
+  const links = getNavLinks(routes);
 
   return (
     <nav className=" bg-base-200 shadow-sm">
@@ -29,29 +29,25 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              {navLinks
-                .filter((link) => link.showInNav)
-                .map((link, index) => {
-                  return (
-                    <li key={index}>
-                      <Navlink {...link} />
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navLinks
-              .filter((link) => link.showInNav)
-              .map((link, index) => {
+              {links.map((link, index) => {
                 return (
                   <li key={index}>
                     <Navlink {...link} />
                   </li>
                 );
               })}
+            </ul>
+          </div>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {links.map((link, index) => {
+              return (
+                <li key={index}>
+                  <Navlink {...link} />
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="navbar-end">

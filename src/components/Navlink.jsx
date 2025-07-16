@@ -1,7 +1,7 @@
 import { NavLink, useMatch } from "react-router-dom";
 
-const Navlink = ({ path, label }) => {
-  const linkPath = path ? path : "/";
+const Navlink = ({ to, label }) => {
+  const linkPath = to ? to : "/";
   const isActive = useMatch(linkPath) ? true : false;
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import customFetch from '../utils';
-import { useLoaderData } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import ProductList from '../components/ProductList';
 
@@ -9,8 +9,6 @@ import ProductList from '../components/ProductList';
 export const loader = async () => {
   try {
     const {data} = await customFetch('/products')
-
-    console.log(data.data);
 
     return data.data
     

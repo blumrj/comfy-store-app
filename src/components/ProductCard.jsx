@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { formatPrice } from "../utils";
 
 const ProductCard = ({ id, image, price, title }) => {
   return (
@@ -14,7 +15,7 @@ const ProductCard = ({ id, image, price, title }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title capitalize">{title}</h2>
-          <p>{price}</p>
+          <p>{formatPrice(price)}</p>
         </div>
       </div>
     </Link>

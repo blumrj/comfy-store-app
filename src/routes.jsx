@@ -15,57 +15,94 @@ import {
 
 import { loader as FeaturedProductsLoader } from "./pages/Landing";
 import { loader as ProductsLoader } from "./pages/Products";
+import { loader as SingleProductLoader } from "./pages/SingleProduct";
 
 export const routes = [
   {
     path: "/",
     Component: HomeLayout,
     errorElement: <Error />,
+    //handle property is a special property in React Router which allows us to store custom data attached to each route. This data can then later be accessed via useMatches().
+    //In this case I want to build dynamic breadcrumbs so i am creating an object with a breadcrumb key and the value is the name I want to display in the breadcrumb
+    handle: {
+      breadcrumb: "Home",
+    },
     children: [
       {
         index: true,
         Component: Landing,
-        label: "Home",
-        showInNav: true,
-        errorElement: <ErrorElement/>,
-        loader: FeaturedProductsLoader
+        // label: "Home",
+        // showInNav: true,
+        errorElement: <ErrorElement />,
+        loader: FeaturedProductsLoader,
+        handle: {
+          nav: { show: true, label: "Home" },
+        },
       },
       {
         path: "about",
         Component: About,
-        label: "About",
-        showInNav: true,
+        // label: "About",
+        // showInNav: true,
+        handle: {
+          nav: { show: true, label: "About" },
+        },
       },
       {
         path: "products",
-        Component: Products,
-        label: "Products",
-        showInNav: true,
-        loader: ProductsLoader
-      },
-      {
-        path: "products/:id",
-        Component: SingleProduct,
-        label: "Products",
-        showInNav: false,
+        // label: "Products",
+        // showInNav: true,
+        handle: {
+          breadcrumb: "Products",
+          nav: { show: true, label: "Products" },
+        },
+        children: [
+          {
+            index: true,
+            Component: Products,
+            loader: ProductsLoader,
+          },
+          {
+            path: ":id",
+            Component: SingleProduct,
+            loader: SingleProductLoader,
+            //accepting the matched object
+            handle: {
+              breadcrumb: (item) => {
+                //getting the data from the loader
+                const product = item.data;
+                return product?.attributes?.title;
+              },
+            },
+          },
+        ],
       },
       {
         path: "cart",
         Component: Cart,
-        label: "Cart",
-        showInNav: true,
+        // label: "Cart",
+        // showInNav: true,
+        handle: {
+          nav: { show: true, label: "Cart" },
+        },
       },
       {
         path: "checkout",
         Component: Checkout,
-        label: "Checkout",
-        showInNav: true,
+        // label: "Checkout",
+        // showInNav: true,
+        handle: {
+          nav: { show: true, label: "Checkout" },
+        },
       },
       {
         path: "orders",
         Component: Orders,
-        label: "Orders",
-        showInNav: true,
+        // label: "Orders",
+        // showInNav: true,
+        handle: {
+          nav: { show: true, label: "Orders" },
+        },
       },
     ],
   },
