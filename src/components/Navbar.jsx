@@ -1,7 +1,7 @@
 import React from "react";
 import { routes } from "../routes";
 import Navlink from "./Navlink";
-import { BsCart3} from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
@@ -29,25 +29,29 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-md dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              {navLinks.map((link, index) => {
+              {navLinks
+                .filter((link) => link.showInNav)
+                .map((link, index) => {
+                  return (
+                    <li key={index}>
+                      <Navlink {...link} />
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {navLinks
+              .filter((link) => link.showInNav)
+              .map((link, index) => {
                 return (
                   <li key={index}>
                     <Navlink {...link} />
                   </li>
                 );
               })}
-            </ul>
-          </div>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navLinks.map((link, index) => {
-              return (
-                <li key={index}>
-                  <Navlink {...link} />
-                </li>
-              );
-            })}
           </ul>
         </div>
         <div className="navbar-end">

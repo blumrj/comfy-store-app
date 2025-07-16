@@ -3,6 +3,7 @@ import {
   Cart,
   Checkout,
   Error,
+  ErrorElement,
   HomeLayout,
   Landing,
   Login,
@@ -11,6 +12,9 @@ import {
   Register,
   SingleProduct,
 } from "./pages";
+
+import { loader as FeaturedProductsLoader } from "./pages/Landing";
+import { loader as ProductsLoader } from "./pages/Products";
 
 export const routes = [
   {
@@ -23,6 +27,8 @@ export const routes = [
         Component: Landing,
         label: "Home",
         showInNav: true,
+        errorElement: <ErrorElement/>,
+        loader: FeaturedProductsLoader
       },
       {
         path: "about",
@@ -35,12 +41,13 @@ export const routes = [
         Component: Products,
         label: "Products",
         showInNav: true,
-        children: [
-          {
-            path: ":id",
-            Component: SingleProduct,
-          },
-        ],
+        loader: ProductsLoader
+      },
+      {
+        path: "products/:id",
+        Component: SingleProduct,
+        label: "Products",
+        showInNav: false,
       },
       {
         path: "cart",

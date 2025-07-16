@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+import axios from "axios"
 
 const customFetch = axios.create({
     baseURL: "https://strapi-store-server.onrender.com/api"
