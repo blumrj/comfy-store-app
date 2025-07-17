@@ -14,9 +14,12 @@ import {
 } from "./pages";
 
 import { loader as FeaturedProductsLoader } from "./pages/Landing";
+import { loader as LoginLoader, action as LoginAction } from "./pages/Login";
 import { loader as ProductsLoader } from "./pages/Products";
 import { loader as SingleProductLoader } from "./pages/SingleProduct";
+
 import { queryClient } from "./queryClient";
+import {store} from './store'
 
 export const routes = [
   {
@@ -111,6 +114,8 @@ export const routes = [
   {
     path: "/login",
     Component: Login,
+    loader: LoginLoader(store),
+    action: LoginAction(store)
   },
   {
     path: "/register",
