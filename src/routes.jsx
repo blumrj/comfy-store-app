@@ -16,6 +16,7 @@ import {
 import { loader as FeaturedProductsLoader } from "./pages/Landing";
 import { loader as ProductsLoader } from "./pages/Products";
 import { loader as SingleProductLoader } from "./pages/SingleProduct";
+import { queryClient } from "./queryClient";
 
 export const routes = [
   {
@@ -34,7 +35,8 @@ export const routes = [
         // label: "Home",
         // showInNav: true,
         errorElement: <ErrorElement />,
-        loader: FeaturedProductsLoader,
+        // we need to pass the queryClient because the loader can't access it automatically. The loader function is a simple async function and not a react component, therefore it can't access hooks and React Context (where the query client lives)
+        loader: FeaturedProductsLoader(queryClient),
         handle: {
           nav: { show: true, label: "Home" },
         },
@@ -60,12 +62,12 @@ export const routes = [
           {
             index: true,
             Component: Products,
-            loader: ProductsLoader,
+            loader: ProductsLoader(queryClient),
           },
           {
             path: ":id",
             Component: SingleProduct,
-            loader: SingleProductLoader,
+            loader: SingleProductLoader(queryClient),
             //accepting the matched object
             handle: {
               breadcrumb: (item) => {

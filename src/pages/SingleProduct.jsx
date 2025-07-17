@@ -3,9 +3,13 @@ import customFetch, { formatPrice } from "../utils";
 import { useLoaderData } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 
-export const loader = async ({ params }) => {
+// eslint-disable-next-line react-refresh/only-export-components
+export const loader = (queryClient) => async ({ params }) => {
   try {
-    const { data } = await customFetch(`/products/${params.id}`);
+    const { data } = await queryClient.ensureQueryData({
+      queryKey: ['singleProduct'],
+      queryFn: () => customFetch(`/products/${params.id}`)
+    });
 
     return data.data;
   } catch (error) {

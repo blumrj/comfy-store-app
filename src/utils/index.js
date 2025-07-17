@@ -14,6 +14,7 @@ export const formatPrice = (price) => {
   return dollarsAmount;
 };
 
+// a func that returns the path and the label of each nav route
 export const getNavLinks = (routes) => {
   const links = routes[0].children
     .filter((item) => item.handle.nav.show)
