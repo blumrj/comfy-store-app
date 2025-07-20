@@ -5,6 +5,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./queryClient";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import { Slide } from "react-toastify";
 
 const router = createBrowserRouter(routes);
 
@@ -19,6 +21,13 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        pauseOnFocusLoss
+        pauseOnHover
+        transition={Slide}
+      />
     </QueryClientProvider>
   );
 };

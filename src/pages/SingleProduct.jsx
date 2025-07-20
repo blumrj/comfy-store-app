@@ -1,25 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import customFetch, { formatPrice } from "../utils";
 import { useLoaderData } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const loader = (queryClient) => async ({ params }) => {
-  try {
-    const { data } = await queryClient.ensureQueryData({
-      queryKey: ['singleProduct'],
-      queryFn: () => customFetch(`/products/${params.id}`)
-    });
+export const loader =
+  (queryClient) =>
+  async ({ params }) => {
+    try {
+      const { data } = await queryClient.ensureQueryData({
+        queryKey: ["singleProduct", params.id],
+        queryFn: () => customFetch(`/products/${params.id}`),
+      });
 
-    return data.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+      return data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 const SingleProduct = () => {
   const { attributes } = useLoaderData();
   const { title, company, description, image, price, colors } = attributes;
+
+  const [productColor, setProductColor] = useState(colors[0]);
+  const [amount, setAmount] = useState(1);
+
+  const handleAmount = (e) => {
+    console.log(e.target.value);
+    setAmount(parseInt(e.target.value));
+  };
 
   return (
     <>
@@ -44,8 +54,11 @@ const SingleProduct = () => {
                 <button
                   key={color}
                   type="button"
-                  className={`badge badge-lg mr-2`}
+                  className={`badge badge-lg mr-2 ${
+                    color === productColor && "border-2 border-primary"
+                  }`}
                   style={{ backgroundColor: color }}
+                  onClick={() => setProductColor(color)}
                 ></button>
               );
             })}
@@ -56,7 +69,7 @@ const SingleProduct = () => {
                 amount
               </h4>
             </label>
-            <select className="select">
+            <select className="select" value={amount} onChange={handleAmount}>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>

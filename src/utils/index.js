@@ -14,16 +14,3 @@ export const formatPrice = (price) => {
   return dollarsAmount;
 };
 
-// a func that returns the path and the label of each nav route
-export const getNavLinks = (routes) => {
-  const links = routes[0].children
-    .filter((item) => item.handle.nav.show)
-    .map((item) => {
-      const label = item.handle?.nav?.label;
-      const to = item.index ? "/" : item.path;
-
-      return { label, to };
-    });
-
-  return links;
-};

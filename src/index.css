@@ -8,3 +8,31 @@
         @apply mx-auto max-w-6xl;
     }
 }
+
+/* light theme */
+[data-theme='caramellatte'] .Toastify__toast{
+  background-color: var(--color-neutral);
+  color: var(--color-neutral-content);
+}
+[data-theme='caramellatte'] .Toastify__toast--success{
+  background-color: var(--color-success);
+  color: var(--color-success-content);
+}
+[data-theme='caramellatte'] .Toastify__toast--error{
+  background-color: var(--color-error-content);
+  color: var(--color-success-content);
+}
+
+/* dark theme */
+[data-theme='dim'] .Toastify__toast{
+  background-color: var(--color-neutral);
+  color: var(--color-neutral-content);
+}
+[data-theme='dim'] .Toastify__toast--success{
+  background-color: var(--color-primary);
+  color: var(--color-success-content);
+}
+[data-theme='dim'] .Toastify__toast--error{
+  background-color: var(--color-error);
+  color: var(--color-success-content);
+}

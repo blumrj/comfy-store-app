@@ -4,6 +4,7 @@ import FormInput from "../components/FormInput";
 import SubmitButton from "../components/SubmitButton";
 import customFetch from "../utils";
 import { loginUser } from "../features/user/userSlice";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const loader = (store) => () => {
@@ -33,9 +34,13 @@ export const action =
       };
       localStorage.setItem("user", JSON.stringify(user));
       store.dispatch(loginUser(user));
+      toast.success("Welcome back!");
       return redirect("/");
     } catch (error) {
-      console.log(error);
+      const errorMessage =
+        error?.response?.data?.error?.message ||
+        "Something went wrong. Please try again later.";
+      toast.error(errorMessage);
     }
   };
 
@@ -62,7 +67,6 @@ const Login = () => {
           />
 
           <SubmitButton text="login" />
-          <button className="btn btn-secondary mt-4">Guest User</button>
           <p className="text-center mt-4">
             Not a member yet?{" "}
             <Link to="/register" className="text-primary">

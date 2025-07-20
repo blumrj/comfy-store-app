@@ -31,7 +31,7 @@ const Landing = () => {
       {/* hero section */}
       <Hero />
       {/* featured products section */}
-      <ProductList products={featuredProducts} />
+      <ProductList products={featuredProducts} showLayoutOptions={false} />
     </>
   );
 };

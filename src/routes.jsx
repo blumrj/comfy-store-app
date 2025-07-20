@@ -9,17 +9,21 @@ import {
   Login,
   Orders,
   Products,
+  ProductsLayout,
   Register,
   SingleProduct,
 } from "./pages";
 
 import { loader as FeaturedProductsLoader } from "./pages/Landing";
 import { loader as LoginLoader, action as LoginAction } from "./pages/Login";
+import {
+  loader as RegisterLoader,
+  action as RegisterAction,
+} from "./pages/Register";
 import { loader as ProductsLoader } from "./pages/Products";
 import { loader as SingleProductLoader } from "./pages/SingleProduct";
-
 import { queryClient } from "./queryClient";
-import {store} from './store'
+import { store } from "./store";
 
 export const routes = [
   {
@@ -35,8 +39,6 @@ export const routes = [
       {
         index: true,
         Component: Landing,
-        // label: "Home",
-        // showInNav: true,
         errorElement: <ErrorElement />,
         // we need to pass the queryClient because the loader can't access it automatically. The loader function is a simple async function and not a react component, therefore it can't access hooks and React Context (where the query client lives)
         loader: FeaturedProductsLoader(queryClient),
@@ -47,16 +49,13 @@ export const routes = [
       {
         path: "about",
         Component: About,
-        // label: "About",
-        // showInNav: true,
         handle: {
           nav: { show: true, label: "About" },
         },
       },
       {
         path: "products",
-        // label: "Products",
-        // showInNav: true,
+        Component: ProductsLayout,
         handle: {
           breadcrumb: "Products",
           nav: { show: true, label: "Products" },
@@ -85,8 +84,6 @@ export const routes = [
       {
         path: "cart",
         Component: Cart,
-        // label: "Cart",
-        // showInNav: true,
         handle: {
           nav: { show: true, label: "Cart" },
         },
@@ -94,19 +91,15 @@ export const routes = [
       {
         path: "checkout",
         Component: Checkout,
-        // label: "Checkout",
-        // showInNav: true,
         handle: {
-          nav: { show: true, label: "Checkout" },
+          nav: { show: true, label: "Checkout", authRequired: true },
         },
       },
       {
         path: "orders",
         Component: Orders,
-        // label: "Orders",
-        // showInNav: true,
         handle: {
-          nav: { show: true, label: "Orders" },
+          nav: { show: true, label: "Orders", authRequired: true },
         },
       },
     ],
@@ -115,10 +108,12 @@ export const routes = [
     path: "/login",
     Component: Login,
     loader: LoginLoader(store),
-    action: LoginAction(store)
+    action: LoginAction(store),
   },
   {
     path: "/register",
     Component: Register,
+    loader: RegisterLoader(store),
+    action: RegisterAction,
   },
 ];

@@ -5,10 +5,11 @@ import { BsCart3 } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
-import { getNavLinks } from "../utils";
+import { useNavLinks } from "../hooks";
 
 const Navbar = () => {
-  const links = getNavLinks(routes);
+  const links = useNavLinks(routes);
+  
 
   return (
     <nav className=" bg-base-200 shadow-sm">

@@ -1,7 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Form, Link, redirect } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import SubmitButton from "../components/SubmitButton";
+import customFetch from "../utils";
+import { toast } from "react-toastify";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const formObj = Object.fromEntries(formData);
+  try {
+    await customFetch.post("/auth/local/register", formObj);
+    toast.success("Success. Please log into your account");
+    return redirect("/login");
+  } catch (error) {
+    const errorMessage =
+      error?.response?.data?.error?.message ||
+      "Something went wrong. Please try again later.";
+    toast.error(errorMessage);
+  }
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const loader = (store) => () => {
+  const { user } = store.getState();
+
+  if (user.user) {
+    return redirect("/");
+  }
+  return {};
+};
 
 const Register = () => {
   return (
@@ -11,7 +39,7 @@ const Register = () => {
           Create an Account
         </h1>
 
-        <form className="fieldset">
+        <Form className="fieldset" method="post">
           <FormInput
             type="text"
             label="username"
@@ -23,7 +51,7 @@ const Register = () => {
             type="email"
             label="email"
             placeholder="Email"
-            name="identifier"
+            name="email"
           />
 
           <FormInput
@@ -41,7 +69,7 @@ const Register = () => {
               Login
             </Link>
           </p>
-        </form>
+        </Form>
       </div>
     </div>
   );
