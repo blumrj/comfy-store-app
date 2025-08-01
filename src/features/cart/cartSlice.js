@@ -1,0 +1,65 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const getItemsFromLocalStorage = () => {
+  return localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [];
+};
+
+const initialState = {
+  cartItems: getItemsFromLocalStorage(),
+  cartItemStatus: null, // added | duplicate | null
+  numItemsInCart: 0,
+  subtotal: 0,
+  shippingFee: 500,
+  taxFee: 0,
+  orderTotal: 0,
+};
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart: (state, action) => {
+      //destructure payload
+      const { id, selectedColor } = action.payload;
+      //check if the item is already in the cartItems array
+      const ifExistsInArray = state.cartItems.find(
+        (item) => item.id === id && item.selectedColor === selectedColor
+      );
+
+      //if it is, set the status
+      if (ifExistsInArray) {
+        state.cartItemStatus = "exists";
+      }
+      //if it isn't, add it to the items array
+      else {
+        state.cartItems.push(action.payload);
+        state.cartItemStatus = "added";
+      }
+    },
+    removeItemFromCart: (state, action) => {
+        //needs to be modified
+      state.cartItems = state.cartItems.filter(item => item.id !== action.payload.id)
+    },
+    editItemAmount: () => {},
+    checkout: () => {},
+    clearItemStatus: (state) => {
+      state.cartItemStatus = null;
+    },
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
+  },
+});
+
+export const {
+  addToCart,
+  removeItemFromCart,
+  editItemAmount,
+  checkout,
+  clearItemStatus,
+  clearCart,
+} = cartSlice.actions;
+
+export default cartSlice.reducer;

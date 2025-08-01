@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from './features/user/userSlice'
+import cartReducer from './features/cart/cartSlice'
 
 //centralized place where we store application state that we want to share across components in the app
 
@@ -12,6 +13,7 @@ import userReducer from './features/user/userSlice'
 // creating redux store
 export const store = configureStore({
     reducer: {
-        user: userReducer
+        user: userReducer,
+        cart: cartReducer
     }
 })

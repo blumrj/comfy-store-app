@@ -21,7 +21,7 @@ const Filters = () => {
       <div className="collapse-title font-semibold">Filters</div>
       <div className="collapse-content text-sm">
         <Form method="get">
-          <div className="grid grid-cols-2">
+          <div className="grid  sm:grid-cols-2">
             {/* categories */}
             <FilterInput label="category" name="category" items={categories} />
             {/* company */}

@@ -14,32 +14,32 @@ import Filters from "../components/Filters";
 export const loader =
   (queryClient) =>
   async ({ request }) => {
+
+    //create a new url object based on the request url
     const url = new URL(request.url);
-    console.log(url);
-    
-    const searchParam = url.searchParams.get("search");
-    const shippingParam = url.searchParams.get("shipping")
-    const categoryParam = url.searchParams.get("category")
-    const companyParam = url.searchParams.get("company")
-    const orderParam = url.searchParams.get("order")
 
+    //create an array to store all of the keys 
+    const paramKeys = ["search", "shipping", "category", "company", "order"];
 
-    const { data } = await queryClient.ensureQueryData({
-      queryKey: ["products", searchParam, shippingParam, categoryParam, companyParam, orderParam],
-      queryFn: () =>
-        customFetch.get("/products", {
-          params: {
-            search: searchParam,
-            shipping: shippingParam,
-            category: categoryParam,
-            company: companyParam,
-            order: orderParam,
-          },
-        }),
+    const queryParams = {};
+    //loop through the param keys to create query params object which will store the matching key and value pairs
+    paramKeys.forEach((param) => {
+      const paramValue = url.searchParams.get(param);
+
+      if (paramValue != null) {
+        queryParams[param] = paramValue;
+      }
     });
 
-    console.log(data.data);
-    
+    const queryKey = ["products", ...paramKeys.map((key) => queryParams[key])];
+
+    const { data } = await queryClient.ensureQueryData({
+      queryKey,
+      queryFn: () =>
+        customFetch.get("/products", {
+          params: queryParams,
+        }),
+    });
 
     return data.data;
   };

@@ -1,21 +1,49 @@
 import { Link } from "react-router-dom";
 import { formatPrice } from "../utils";
 
-const ProductCard = ({ id, image, price, title, layout }) => {
-  const isGrid = layout === 'grid'
+const ProductCard = ({
+  id,
+  image,
+  company,
+  price,
+  title,
+  layout,
+  selectedColor,
+  amount,
+}) => {
+  const isGrid = layout === "grid";
   return (
     <Link to={`/products/${id}`}>
-      <div className={`card bg-accent-content shadow-xl hover:shadow-2xl transition duration-300 {${isGrid ? '' : 'flex flex-row items-center'}}`}>
+      <div
+        className={`card bg-accent-content shadow-xl hover:shadow-2xl transition duration-300 ${
+          isGrid ? "" : "card-side"
+        }`}
+      >
         <figure>
           <img
             src={image}
             alt={title}
-            className={`rounded-xl h-64 md:h-48 w-full object-cover hover:scale-120 transition duration-250 ease-in-out ${isGrid ? '' : 'aspect-square'}`}
+            className={`rounded-xl h-64 md:h-48 w-full object-cover hover:scale-120 transition duration-250 ease-in-out ${
+              isGrid ? "" : "aspect-square"
+            }`}
           />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title capitalize">{title}</h2>
-          <p>{formatPrice(price)}</p>
+        <div className="card-body flex flex-row justify-between">
+          <div>
+            <h2 className="card-title capitalize">{title}</h2>
+            <h4 className="italic mb-3">{company}</h4>
+            {selectedColor && (
+              <div>
+                <div
+                  //add a custom class to mark the chosen color
+                  className="badge badge-lg mr-2 "
+                  style={{ backgroundColor: selectedColor }}
+                ></div>
+              </div>
+            )}
+            {amount && <div>amount: {amount}</div>}
+            <p>{formatPrice(price)}</p>
+          </div>
         </div>
       </div>
     </Link>
