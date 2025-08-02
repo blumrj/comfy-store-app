@@ -39,8 +39,12 @@ const cartSlice = createSlice({
       }
     },
     removeItemFromCart: (state, action) => {
-        //needs to be modified
-      state.cartItems = state.cartItems.filter(item => item.id !== action.payload.id)
+      const { id, selectedColor } = action.payload;
+
+      //keep every item except the one with both a matching id and selectedColor.
+      state.cartItems = state.cartItems.filter(
+        (item) => !(item.id == id && item.selectedColor == selectedColor)
+      );
     },
     editItemAmount: () => {},
     checkout: () => {},

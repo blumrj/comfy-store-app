@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { Slide } from "react-toastify";
+import Modal from "./components/Modal";
 
 const router = createBrowserRouter(routes);
 
