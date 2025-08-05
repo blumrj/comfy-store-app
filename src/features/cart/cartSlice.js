@@ -8,7 +8,7 @@ const getItemsFromLocalStorage = () => {
 
 const initialState = {
   cartItems: getItemsFromLocalStorage(),
-  cartItemStatus: null, // added | duplicate | null
+  cartItemStatus: null, // added | duplicate | null | edited
   numItemsInCart: 0,
   subtotal: 0,
   shippingFee: 500,
@@ -38,6 +38,7 @@ const cartSlice = createSlice({
         state.cartItemStatus = "added";
       }
     },
+
     removeItemFromCart: (state, action) => {
       const { id, selectedColor } = action.payload;
 
@@ -46,6 +47,19 @@ const cartSlice = createSlice({
         (item) => !(item.id == id && item.selectedColor == selectedColor)
       );
     },
+
+    editItemColor: (state, action) => {
+      const { id, selectedColor, newColor } = action.payload;
+
+      state.cartItems = state.cartItems.map((item) => {
+        if (item.id === id && item.selectedColor === selectedColor) {
+          item.selectedColor = newColor;
+        }
+
+        return item;
+      });
+    },
+
     editItemAmount: () => {},
     checkout: () => {},
     clearItemStatus: (state) => {
@@ -60,6 +74,7 @@ const cartSlice = createSlice({
 export const {
   addToCart,
   removeItemFromCart,
+  editItemColor,
   editItemAmount,
   checkout,
   clearItemStatus,

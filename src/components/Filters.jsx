@@ -45,7 +45,7 @@ const Filters = () => {
             </button>
             <button
               type="reset"
-              className="btn btn-accent capitalize w-1/8"
+              className="btn btn-neutral capitalize w-1/8"
               onClick={handleReset}
             >
               reset

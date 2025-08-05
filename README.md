@@ -1958,7 +1958,7 @@ const Filters = () => {
       <button type='submit' className='btn btn-primary btn-sm '>
         search
       </button>
-      <Link to='/products' className='btn btn-accent btn-sm'>
+      <Link to='/products' className='btn btn-neutral btn-sm'>
         reset
       </Link>
     </Form>
@@ -2426,7 +2426,7 @@ const Filters = () => {
       <button type='submit' className='btn btn-primary btn-sm'>
         search
       </button>
-      <Link to='/products' className='btn btn-accent btn-sm'>
+      <Link to='/products' className='btn btn-neutral btn-sm'>
         reset
       </Link>
     </Form>

@@ -9,11 +9,13 @@ const CartItemCard = ({
   selectedColor,
   amount,
   removeItem,
-  handleModal
+  handleModal,
 }) => {
-
   return (
-    <div key={id} className="card card-side bg-accent-content shadow-xl hover:shadow-2xl transition duration-300">
+    <div
+      key={id}
+      className="card card-side bg-accent-content shadow-xl hover:shadow-2xl transition duration-300"
+    >
       <figure>
         <img
           src={image}
@@ -38,10 +40,16 @@ const CartItemCard = ({
           <p>{formatPrice(price)}</p>
         </div>
         <div className="flex gap-2 justify-end">
-          <button className="btn btn-sm btn-accent capitalize" onClick={handleModal}>
+          <button
+            className="btn btn-sm btn-neutral capitalize"
+            onClick={handleModal}
+          >
             modify item
           </button>
-          <button className="btn btn-sm btn-accent capitalize" onClick={() => removeItem(id, selectedColor)}>
+          <button
+            className="btn btn-sm btn-neutral capitalize"
+            onClick={() => removeItem(id, selectedColor)}
+          >
             remove item
           </button>
         </div>

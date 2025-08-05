@@ -1,19 +1,42 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editItemColor } from "../features/cart/cartSlice";
+import { toast } from "react-toastify";
 
-const ModifyItemForm = ({ item }) => {
-    
+const ModifyItemForm = ({ item, closeModal }) => {
   const [selectedColor, setSelectedColor] = useState(item.selectedColor);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((store) => store.cart.cartItems);
+
+  const handleColorChange = () => {
+    const ifItemWithNewColorExist = cartItems.find(
+      (cartItem) =>
+        cartItem.id === item.id &&
+        cartItem.selectedColor === selectedColor &&
+        cartItem.selectedColor !== item.selectedColor
+    );
+
+    if (ifItemWithNewColorExist) {
+      toast.error("An item with this color is already in your cart.");
+      closeModal();
+      return;
+    }
+
+    dispatch(editItemColor({ ...item, newColor: selectedColor }));
+
+    toast.success("Item Modified Successfully");
+    closeModal();
+  };
 
   useEffect(() => {
-    setSelectedColor(item.selectedColor)
-  }, [item])
-  
-//   const [amount, setAmount] = useState(item.amount);
+    setSelectedColor(item.selectedColor);
+  }, [item]);
+
+  //   const [amount, setAmount] = useState(item.amount);
 
   return (
     <div>
       {item.colors.map((color) => {
-        
         return (
           <button
             key={color}
@@ -27,7 +50,9 @@ const ModifyItemForm = ({ item }) => {
           ></button>
         );
       })}
-      <button className="btn btn-accent">Save Changes</button>
+      <button className="btn btn-neutral" onClick={handleColorChange}>
+        Save Changes
+      </button>
     </div>
   );
 };

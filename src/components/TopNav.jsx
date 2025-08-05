@@ -19,7 +19,7 @@ const TopNav = () => {
           <div className="flex gap-x-6">
             <p>{user?.username ? `Hello, ${user.username}` : "Hello"}</p>
             <button
-              className="btn btn-accent btn-sm text-xs"
+              className="btn btn-neutral btn-sm text-xs"
               onClick={handleLogout}
             >
               Logout

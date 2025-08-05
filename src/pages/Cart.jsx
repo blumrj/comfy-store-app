@@ -22,7 +22,6 @@ const Cart = () => {
 
   const handleModal = (item) => {
     setModalItem(item);
-    // document.getElementById("custom-modal").showModal();
   };
 
   const closeModal = () => {
@@ -35,7 +34,7 @@ const Cart = () => {
         <SectionTitle title="shopping cart" />
         {cartItems.length ? (
           <button
-            className="btn btn-sm btn-accent w-40"
+            className="btn btn-sm btn-neutral w-40"
             onClick={handleClearCart}
           >
             Clear Cart
@@ -62,7 +61,7 @@ const Cart = () => {
         <div>
           <h4 className="capitalize text-2xl">Your Cart Is Empty</h4>
           <Link to="/products">
-            <button className="btn btn-sm btn-accent mt-4">
+            <button className="btn btn-sm btn-neutral mt-4">
               See All Products
             </button>
           </Link>
