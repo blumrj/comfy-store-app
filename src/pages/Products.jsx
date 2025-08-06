@@ -3,6 +3,7 @@ import customFetch from "../utils";
 import { useLoaderData } from "react-router-dom";
 import ProductList from "../components/ProductList";
 import Filters from "../components/Filters";
+import Pagination from "../components/Pagination";
 
 //defining a loader func which we'll call in the routes.jsx file for the matching route - /products
 
@@ -14,12 +15,11 @@ import Filters from "../components/Filters";
 export const loader =
   (queryClient) =>
   async ({ request }) => {
-
     //create a new url object based on the request url
     const url = new URL(request.url);
 
-    //create an array to store all of the keys 
-    const paramKeys = ["search", "shipping", "category", "company", "order"];
+    //create an array to store all of the keys
+    const paramKeys = ["search", "shipping", "category", "company", "order", "page"];
 
     const queryParams = {};
     //loop through the param keys to create query params object which will store the matching key and value pairs
@@ -41,15 +41,19 @@ export const loader =
         }),
     });
 
-    return data.data;
+    return { products: data.data, meta: data.meta };
   };
 
 const Products = () => {
-  const products = useLoaderData();
+  const { products, meta } = useLoaderData();
+  const { total } = meta.pagination;
+  
+
   return (
     <div>
       <Filters />
-      <ProductList products={products} />
+      <ProductList products={products} total={total} />
+      <Pagination {...meta.pagination} />
     </div>
   );
 };

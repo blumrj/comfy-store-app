@@ -5,11 +5,13 @@ import { useState } from "react";
 
 const ProductList = ({
   products,
+  total,
   layout = "grid",
   showLayoutOptions = true,
 }) => {
   const [activeLayout, setActiveLayout] = useState(layout);
   const isGrid = activeLayout === "grid";
+  
 
   const layoutClasses = isGrid
     ? "grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16"
@@ -27,7 +29,7 @@ const ProductList = ({
     <>
       {showLayoutOptions && (
         <div className="flex justify-between border-b pb-2">
-          <p>{products.length} results </p>
+          <p>{total} results </p>
           <div className="hidden md:inline-block">
             <button
               className={`${baseBtnClasses} ${isGrid ? activeBtnClasses : ""}`}
@@ -49,7 +51,14 @@ const ProductList = ({
         {products.map((product) => {
           const { id, attributes } = product;
 
-          return <ProductCard key={id} {...attributes} id={id} layout={activeLayout} />;
+          return (
+            <ProductCard
+              key={id}
+              {...attributes}
+              id={id}
+              layout={activeLayout}
+            />
+          );
         })}
       </div>
     </>

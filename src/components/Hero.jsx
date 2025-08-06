@@ -7,7 +7,7 @@ import hero4 from "../assets/hero4.webp";
 const Hero = () => {
   const images = [hero1, hero2, hero3, hero4];
   return (
-    <div className="grid md:grid-cols-2 gap-24 items-center">
+    <div className="flex justify-around mb-24">
       <div>
         <h1 className="max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl">
           We are changing the way people shop

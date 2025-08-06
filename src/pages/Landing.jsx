@@ -2,6 +2,7 @@ import Hero from "../components/Hero";
 import ProductList from "../components/ProductList";
 import customFetch from "../utils";
 import { useLoaderData } from "react-router-dom";
+import SectionTitle from '../components/SectionTitle'
 
 
 //we're creating a function that calls another function because we need to pass queryClient as an argument but the loader func by design can't have custom arguments
@@ -31,6 +32,7 @@ const Landing = () => {
       {/* hero section */}
       <Hero />
       {/* featured products section */}
+      <SectionTitle title="Featured Products"/>
       <ProductList products={featuredProducts} showLayoutOptions={false} />
     </>
   );

@@ -14,7 +14,7 @@ const CartItemCard = ({
   return (
     <div
       key={id}
-      className="card card-side bg-accent-content shadow-xl hover:shadow-2xl transition duration-300"
+      className="card card-side bg-base-300 shadow-xl hover:shadow-2xl transition duration-300"
     >
       <figure>
         <img

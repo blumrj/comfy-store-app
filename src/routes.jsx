@@ -7,7 +7,6 @@ import {
   HomeLayout,
   Landing,
   Login,
-  Orders,
   Products,
   ProductsLayout,
   Register,
@@ -22,6 +21,7 @@ import {
 } from "./pages/Register";
 import { loader as ProductsLoader } from "./pages/Products";
 import { loader as SingleProductLoader } from "./pages/SingleProduct";
+import { loader as CheckoutLoader } from "./pages/Checkout";
 import { queryClient } from "./queryClient";
 import { store } from "./store";
 
@@ -91,15 +91,9 @@ export const routes = [
       {
         path: "checkout",
         Component: Checkout,
+        loader: CheckoutLoader(store),
         handle: {
           nav: { show: true, label: "Checkout", authRequired: true },
-        },
-      },
-      {
-        path: "orders",
-        Component: Orders,
-        handle: {
-          nav: { show: true, label: "Orders", authRequired: true },
         },
       },
     ],

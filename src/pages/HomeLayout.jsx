@@ -22,14 +22,14 @@ const HomeLayout = () => {
       {/* loading bar */}
       {isLoading && (
         <>
-          <div className="bg-primary absolute w-[100vw] min-h-[100vh] z-30 opacity-30"></div>
+          <div className="bg-primary absolute top-0 bottom-0 w-[100vw] min-h-screen z-30 opacity-30"></div>
           <span className="loading loading-ring loading-xl fixed top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-50"></span>
         </>
       )}
       <TopNav />
       <Navbar />
 
-      <section className="align-element py-20 ">
+      <section className="container mx-auto py-20">
         <Outlet />
       </section>
     </div>

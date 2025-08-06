@@ -49,32 +49,27 @@ const cartSlice = createSlice({
     },
 
     editItem: (state, action) => {
-      
       const { id, selectedColor, newColor, amount, newAmount } = action.payload;
-      
 
-      if (newColor !== undefined) {
-        state.cartItems = state.cartItems.map((item) => {
-          if (item.id === id && item.selectedColor === selectedColor) {
+      state.cartItems = state.cartItems.map((item) => {
+        const targetItem =
+          item.id === id &&
+          item.amount === amount &&
+          item.selectedColor === selectedColor;
+
+        if (targetItem) {
+          if (newColor !== undefined) {
             item.selectedColor = newColor;
           }
 
-          return item;
-        });
-      }
-
-      if (newAmount !== undefined) {
-        
-        state.cartItems = state.cartItems.map((item) => {
-          if (item.id === id && item.amount === amount && item.selectedColor === selectedColor) {
+          if (newAmount !== undefined) {
             item.amount = newAmount;
           }
+        }
 
-          return item;
-        });
-      }
+        return item;
+      });
     },
-    checkout: () => {},
     clearItemStatus: (state) => {
       state.cartItemStatus = null;
     },
@@ -88,7 +83,6 @@ export const {
   addToCart,
   removeItemFromCart,
   editItem,
-  checkout,
   clearItemStatus,
   clearCart,
 } = cartSlice.actions;

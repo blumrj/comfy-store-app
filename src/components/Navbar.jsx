@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <nav className=" bg-base-200 shadow-sm">
-      <div className="navbar align-element">
+      <div className="navbar container mx-auto">
         <div className="navbar-start ">
           {/* logo */}
           <a className="hidden lg:flex btn btn-primary text-3xl items-center ">

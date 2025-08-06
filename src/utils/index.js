@@ -18,3 +18,14 @@ export const isEmpty = (obj) => {
   return Object.keys(obj).length === 0
 }
 
+export const calculateTotals = (items, shippingFee = 500) =>{
+  let subtotal = 0;
+  items.map(item => {
+    subtotal += item.price * item.amount
+  })
+
+  const total = subtotal + shippingFee
+
+  return {total, subtotal}
+}
+
