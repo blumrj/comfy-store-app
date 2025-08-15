@@ -10,10 +10,7 @@ const initialState = {
   cartItems: getItemsFromLocalStorage(),
   cartItemStatus: null, // added | duplicate | null | edited
   numItemsInCart: 0,
-  subtotal: 0,
   shippingFee: 500,
-  taxFee: 0,
-  orderTotal: 0,
 };
 
 const cartSlice = createSlice({

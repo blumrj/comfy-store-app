@@ -1,10 +1,15 @@
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate, Link } from "react-router-dom";
+import CheckoutCard from "../components/CheckoutCard";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../features/cart/cartSlice";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const loader = (store) => () => {
   const { user } = store.getState();
 
-   if (!user.user) {
+  if (!user.user) {
     return redirect("/");
   }
 
@@ -12,11 +17,68 @@ export const loader = (store) => () => {
 };
 
 const Checkout = () => {
-  return (
-    <div>
-      checkout
-    </div>
-  )
-}
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const cartItems = useSelector((store) => store.cart.cartItems);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-export default Checkout
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (name != "" && address != "") {
+      toast.success("Order confirmed!");
+      setName("");
+      setAddress("");
+
+      dispatch(clearCart());
+
+      navigate("/");
+    } else {
+      toast.error("Please enter all of the details.");
+    }
+  };
+
+  return (
+    <>
+      {cartItems.length ? (
+        <div className="flex flex-col lg:flex-row justify-around items-start gap-8 mt-16">
+          <form onSubmit={handleSubmit}>
+            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-lg border p-4">
+              <label className="label">Name</label>
+              <input
+                type="text"
+                className="input w-full"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+
+              <label className="label">Address</label>
+              <input
+                type="text"
+                className="input w-full"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <button type="submit" className="btn btn-accent mt-4">
+                Order
+              </button>
+            </fieldset>
+          </form>
+          <CheckoutCard showButton={false} />
+        </div>
+      ) : (
+        <div>
+          <h4 className="capitalize text-2xl">Your Cart Is Empty</h4>
+          <Link to="/products">
+            <button className="btn btn-sm btn-neutral mt-4">
+              See All Products
+            </button>
+          </Link>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Checkout;

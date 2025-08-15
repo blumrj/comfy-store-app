@@ -55,7 +55,6 @@ const Login = () => {
             label="email"
             placeholder="Email"
             name="identifier"
-            defaultValue="test@test.com"
           />
 
           <FormInput
@@ -63,7 +62,6 @@ const Login = () => {
             label="password"
             placeholder="Password"
             name="password"
-            defaultValue="secret"
           />
 
           <SubmitButton text="login" />
