@@ -33,7 +33,7 @@ const Cart = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between ">
         <SectionTitle title="shopping cart" />
         {cartItems.length ? (
           <button

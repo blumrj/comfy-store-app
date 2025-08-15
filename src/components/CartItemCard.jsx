@@ -14,7 +14,7 @@ const CartItemCard = ({
   return (
     <div
       key={id}
-      className="card card-side bg-base-300 shadow-xl hover:shadow-2xl transition duration-300"
+      className="card md:card-side bg-base-300 shadow-xl hover:shadow-2xl transition duration-300"
     >
       <figure>
         <img
@@ -23,7 +23,7 @@ const CartItemCard = ({
           className="rounded-xl h-64 md:h-48 w-full object-cover aspect-square"
         />
       </figure>
-      <div className="card-body flex flex-row justify-between">
+      <div className="card-body flex flex-col md:flex-row justify-between">
         <div>
           <h2 className="card-title capitalize">{title}</h2>
           <h4 className="italic mb-3">{company}</h4>

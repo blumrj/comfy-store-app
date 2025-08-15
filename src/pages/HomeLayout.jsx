@@ -29,7 +29,7 @@ const HomeLayout = () => {
       <TopNav />
       <Navbar />
 
-      <section className="container mx-auto py-20">
+      <section className="container mx-auto py-20 px-4">
         <Outlet />
       </section>
     </div>

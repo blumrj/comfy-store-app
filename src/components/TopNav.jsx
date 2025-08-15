@@ -15,7 +15,7 @@ const TopNav = () => {
   };
 
   return (
-    <nav className="bg-base-100 py-2">
+    <nav className="bg-base-300 py-2">
       <div className="container mx-auto flex justify-center sm:justify-end">
         {user ? (
           <div className="flex gap-x-6">

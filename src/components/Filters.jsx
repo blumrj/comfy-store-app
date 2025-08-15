@@ -39,13 +39,13 @@ const Filters = () => {
           <div className="my-4">
             <button
               type="submit"
-              className="btn btn-primary capitalize mr-4 w-1/8"
+              className="btn btn-primary capitalize mr-4 mb-4 w-1/2 md:w-1/8"
             >
               submit
             </button>
             <button
               type="reset"
-              className="btn btn-neutral capitalize w-1/8"
+              className="btn btn-neutral capitalize mb-4 w-1/2 md:w-1/8"
               onClick={handleReset}
             >
               reset
